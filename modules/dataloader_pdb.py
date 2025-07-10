@@ -447,12 +447,12 @@ class Dataset(torch.utils.data.Dataset):
                 # propotrionally to the diameter of of H
                 diam = nx.diameter(H)
                 anchors_i = observed_atoms[:max(1,diam//(2*cutoff))]
-                pairs.extend([next(((i,j) for j,_ in nx.single_target_shortest_path_length(H,i) if j in anchors_i)) for i in cc])
+                pairs.extend([next(((i,j) for j,_ in nx.single_target_shortest_path_length(H,i).items() if j in anchors_i)) for i in cc])
                 to_perturb.extend(anchors_i)
             
             else:
                 # TODO: account for big patches of structure w/o bb
-                pairs.extend([next(((i,j) for j,_ in nx.single_target_shortest_path_length(G,i) if j in anchors)) for i in cc])
+                pairs.extend([next(((i,j) for j,_ in nx.single_target_shortest_path_length(G,i).items() if j in anchors)) for i in cc])
         
         return pairs, to_perturb
 
