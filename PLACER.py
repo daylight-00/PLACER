@@ -53,7 +53,7 @@ class PLACER():
             NPROC = int(os.environ["SLURM_CPUS_ON_NODE"])
 
         print(f"Using checkpoint: {self.__checkpoint}")
-        chk = torch.load(self.__checkpoint, map_location=self.__device)
+        chk = torch.load(self.__checkpoint, map_location=self.__device, weights_only=True)
         self.__params = chk["params"]
 
         self.__DataLoader = dataloader.PDBDataset(csv = f'{DIR}/data/test.csv',  # mock dataset for inference
