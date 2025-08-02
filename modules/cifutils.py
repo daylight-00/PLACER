@@ -434,7 +434,7 @@ class CIFParser:
             oper_expression = assembly_gen.getValue("oper_expression", index)
 
             oper_list = [CIFParser.parseOperationExpression(expression) 
-                         for expression in re.split('\(|\)', oper_expression) if expression]
+                         for expression in re.split(r'\(|\)', oper_expression) if expression]
 
             # chain IDs which the transform should be applied to
             chains.append(assembly_gen.getValue("asym_id_list", index).split(','))
